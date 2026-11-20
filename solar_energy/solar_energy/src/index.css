@@ -1,0 +1,483 @@
+@import './css/style.css';
+
+:root {
+  font-family: 'Rubik', Arial, Helvetica, sans-serif;
+  --green: #1A3837;
+}
+
+html,
+body {
+  background-color: #1A3837 !important;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+#smooth-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* Floating Navbar (hidden in Hero, slides down from top ONLY on scroll UP past Hero) */
+.content_navigation.hide_navigation {
+  position: fixed !important;
+  top: 30px !important;
+  left: 75px !important;
+  width: calc(100% - 150px) !important;
+  border-radius: 20px !important;
+  height: 70px !important;
+  background: rgba(247, 247, 243, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-200px) !important;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease !important;
+  opacity: 0 !important;
+  z-index: 999999 !important;
+  pointer-events: none !important;
+}
+
+.content_navigation.hide_navigation.active {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Hero navbar: keep logo, links and actions on one line, inside the hero */
+.content_navigation.normal_navigation {
+  flex-wrap: nowrap !important;
+  gap: 24px;
+  top: 48px !important;
+  height: 110px !important;
+  padding: 0 clamp(24px, 6vw, 110px) !important;
+}
+
+.content_navigation .logo {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.content_navigation .logo img {
+  display: block;
+  height: 44px;
+  width: auto;
+}
+
+.content_navigation.hide_navigation .logo img {
+  height: 40px;
+}
+
+/* Navy logo needs a light backdrop on the dark hero */
+.content_navigation.normal_navigation .logo {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 8px 14px;
+  border-radius: 12px;
+}
+
+.content_navigation .content_links {
+  flex-wrap: nowrap;
+}
+
+.content_navigation .content_links li {
+  margin: 0 clamp(16px, 2.2vw, 60px) 0 0 !important;
+  white-space: nowrap;
+}
+
+.content_navigation .content_links li:last-child {
+  margin: 0 !important;
+}
+
+.content_navigation .content_actions {
+  flex-shrink: 0;
+}
+
+@media (max-width: 1100px) {
+  .content_navigation.normal_navigation .content_links {
+    display: none !important;
+  }
+}
+
+.content_navigation .logo,
+.content_navigation .content_links,
+.content_navigation .content_actions,
+.content_navigation .content_burger,
+.content_navigation a,
+.content_navigation .link_sections {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  z-index: 100000 !important;
+}
+
+.footer_reveal_wrapper {
+  position: relative !important;
+  width: 100% !important;
+  height: 100vh !important;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+footer.row {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  z-index: -1 !important;
+  background: #F7F7F3 !important;
+  pointer-events: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+  padding: 50px 0 20px !important;
+  overflow: hidden !important;
+}
+
+.content_footer_space {
+  display: none !important;
+}
+
+/* Circle Sharpness & Hardware Acceleration */
+.home .content_dot .circle {
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 50% !important;
+  transition: none !important;
+}
+
+/* Upper sections & PM Surya Ghar Banner stay Dark Green (#1A3837) */
+.home .content_banner,
+.home .content_banner::before,
+.home .content_about,
+.home .content_about::before {
+  background: var(--green) !important;
+}
+
+/* News Section smoothly transitions from Dark Green to Greyish Soft Green when scrolled to */
+.home .content_news,
+.home .content_news::before {
+  background: var(--green);
+  transition: background 1s ease-in-out, color 1s ease-in-out !important;
+}
+
+.home .content_news.active_bg_change,
+.home .content_news.active_bg_change::before {
+  background: var(--soft-green) !important;
+}
+
+/* FAQ & Specs Section Title Visibility Fixes */
+#faq h2,
+#specs h2,
+.home #faq h2,
+.home #specs h2 {
+  color: var(--yellow) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#faq p,
+#specs p,
+.home #faq p,
+.home #specs p {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Expert Solar Tip text on yellow banner MUST be Dark Green (#1A3837) */
+#specs p.solar_tip_text,
+#specs .solar_tip_text,
+.home #specs p.solar_tip_text {
+  color: #1A3837 !important;
+}
+
+/* Ticker Marquee between AboutUs and BioTokensBanner - Compact Spacing */
+.home .content_about {
+  padding-bottom: 20px !important;
+}
+
+.home .content_about article .content_more_information {
+  margin-bottom: 20px !important;
+  padding-bottom: 0 !important;
+}
+
+.content_marquee_ticker {
+  background: var(--green) !important;
+  padding: 10px 0 !important;
+  margin: 0 !important;
+  pointer-events: all;
+  position: relative;
+  z-index: 2;
+}
+
+.home .content_banner {
+  padding-top: 20px !important;
+}
+
+.content_marquee_ticker .simple-marquee-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.content_marquee_ticker .marquee,
+.content_marquee_ticker .marquee-content-items {
+  --duration: 90s !important;
+  animation-duration: 90s !important;
+}
+
+.content_marquee_ticker .marquee-content-items li {
+  font-size: clamp(2.2rem, 3.5vw, 3.8rem) !important;
+  color: #FFFFFF !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.5px !important;
+  margin-right: 40px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.content_marquee_ticker .marquee-content-items li span.highlight_text {
+  font-family: 'IBM Plex Serif', serif !important;
+  font-style: italic !important;
+  color: var(--yellow) !important;
+  font-weight: 400 !important;
+}
+
+.content_marquee_ticker .marquee-content-items li span.highlight_accent {
+  color: #FFFFFF !important;
+  font-weight: 500 !important;
+}
+
+/* Project Dot Text Formatting & Reveal Masking */
+.home .content_dot .text > .text_reveal {
+  max-width: clamp(800px, 75vw, 1150px) !important;
+  margin: 0 auto !important;
+  font-size: clamp(2.2rem, 3.8vw, 4rem) !important;
+  line-height: 1.25 !important;
+  text-align: left !important;
+}
+
+
+
+
+/* Hero Slider Typography & Layout Adjustments */
+.home .content_hero .content_slider .slider .item .content {
+  padding: 0 70px 100px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+}
+
+.home .content_hero .content_slider .slider .item .content h3 {
+  font-size: clamp(2.4rem, 4vw, 4.2rem) !important;
+  line-height: 1.15 !important;
+  max-width: 850px !important;
+  margin-bottom: 14px !important;
+  word-wrap: break-word;
+}
+
+.home .content_hero .content_slider .slider .item .content h4 {
+  font-size: 1.05rem !important;
+  line-height: 1.5 !important;
+  max-width: 650px !important;
+  margin-bottom: 24px !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+.home .content_hero .content_slider .slider .item .content .content_buttons {
+  margin-top: 5px !important;
+}
+
+
+/* Steps Video Height & 6 Card Scroll Adjustments */
+.home .content_steps_video {
+  height: calc(600vh + 100px) !important;
+}
+
+.home .content_steps_video .content_sticky #container {
+  height: 600vh !important;
+}
+
+.home .content_steps_video .content_sticky .content_menu {
+  height: 190px !important;
+}
+
+.home .content_steps_video .content_item.item01 { top: 0vh !important; }
+.home .content_steps_video .content_item.item02 { top: 100vh !important; }
+.home .content_steps_video .content_item.item03 { top: 200vh !important; }
+.home .content_steps_video .content_item.item04 { top: 300vh !important; }
+.home .content_steps_video .content_item.item05 { top: 400vh !important; }
+.home .content_steps_video .content_item.item06 { top: 500vh !important; }
+
+/* Footer Marquee Partner Logos Box - Large Logos & Vertically Centered */
+footer .content_marquee_logos {
+  height: 100px !important;
+  background: #F3F3EF !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 40px 10px 40px 10px !important;
+  overflow: hidden !important;
+  margin: 40px 0 25px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+footer .content_marquee_logos .marquee,
+footer .content_marquee_logos .simple-marquee-container {
+  height: 100% !important;
+  width: 100% !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+
+footer .content_marquee_logos .marquee-content-items {
+  height: 100px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+footer .content_marquee_logos .marquee-content-items li {
+  height: 100px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 55px 0 0 !important;
+  gap: 12px !important;
+  line-height: 1 !important;
+}
+
+footer .content_marquee_logos .partner_label {
+  font-weight: 700 !important;
+  color: #1A3837 !important;
+  font-size: 1.15rem !important;
+  letter-spacing: -0.2px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+footer .content_marquee_logos .partner_logo_item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  color: #556B69 !important;
+}
+
+footer .content_marquee_logos .partner_logo_item svg {
+  color: #556B69 !important;
+  opacity: 0.85;
+}
+
+footer .content_marquee_logos .partner_brand {
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+  color: #556B69 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+}
+
+footer .content_marquee_logos .partner_brand_bold {
+  font-weight: 800 !important;
+  font-size: 1.35rem !important;
+  color: #3A4D4B !important;
+  letter-spacing: 0.5px !important;
+}
+
+footer .content_marquee_logos .partner_sub {
+  font-weight: 600 !important;
+  font-size: 1.05rem !important;
+  color: #8A9E9C !important;
+  letter-spacing: 1px !important;
+}
+
+/* Footer Contact Us Video Card & Title Text Styling */
+footer .content_contactus {
+  position: relative !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  background: #1A3837 !important;
+  min-height: 220px !important;
+}
+
+footer .content_contactus video,
+footer .content_contactus video#video_background {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 1 !important;
+  opacity: 0.85 !important;
+  filter: none !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+footer .content_contactus .content_information {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+footer .content_contactus h3,
+footer .content_contactus .content_information h3 {
+  color: #FFFFFF !important;
+  font-size: 1.6rem !important;
+  font-weight: 500 !important;
+  line-height: 1.25 !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Footer Link Clickability & Stretching Underline Hover Animation */
+footer .content_links a {
+  position: relative !important;
+  display: inline-block !important;
+  color: #1A3837 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 10 !important;
+  transition: color 0.3s ease !important;
+}
+
+footer .content_links a::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 0 !important;
+  width: 0% !important;
+  height: 2px !important;
+  background-color: #1A3837 !important;
+  transition: width 0.3s ease-in-out !important;
+}
+
+footer .content_links a:hover {
+  color: #0F2524 !important;
+}
+
+footer .content_links a:hover::after {
+  width: 100% !important;
+}
+
+footer .content_navigation_footer {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
