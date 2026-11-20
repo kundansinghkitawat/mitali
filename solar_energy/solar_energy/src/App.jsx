@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import LoadingLoader from './components/LoadingLoader';
 import { NavbarHide, NavbarNormal } from './components/Navbar';
 import HeroSlider from './components/HeroSlider';
 import ProjectDotReveal from './components/ProjectDotReveal';
@@ -23,9 +22,6 @@ function App() {
 
   return (
     <>
-      {/* Loading preloader screen */}
-      <LoadingLoader />
-
       {/* Sticky floating navigation bar */}
       <NavbarHide />
 
